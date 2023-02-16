@@ -5,7 +5,9 @@ import store from './store'
 import installElementPlus from './plugins/element'
 import installIcons from './icons'
 // 导入全局样式
-import './style/index.scss'
+import './styles/index.scss'
+// 导入权限文件
+import './permission'
 
 const app = createApp(App)
 // 导入 ElementPlus

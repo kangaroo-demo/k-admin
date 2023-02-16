@@ -55,6 +55,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import router from '@/router'
 
 import { validatePassword } from './rules'
 
@@ -85,6 +86,8 @@ const handleLogin = () => {
       .dispatch('user/login', loginForm.value)
       .then(() => {
         loading.value = false
+        console.log('success login')
+        router.push('/')
       })
       .catch(() => {
         loading.value = false
