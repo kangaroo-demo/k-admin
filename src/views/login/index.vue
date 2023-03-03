@@ -7,7 +7,7 @@
       :rules="loginRules"
     >
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
       </div>
 
       <el-form-item prop="username">
@@ -46,8 +46,10 @@
         style="width: 100%; margin-bottom: 30px"
         @click="handleLogin"
       >
-        登录
+        {{ $t('msg.login.loginBtn') }}
       </el-button>
+
+      <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
 </template>
@@ -58,6 +60,7 @@ import { useStore } from 'vuex'
 import router from '@/router'
 
 import { validatePassword } from './rules'
+import { useI18n } from 'vue-i18n'
 
 const passwordType = ref('password')
 const onChangePwdType = () => {
@@ -67,9 +70,15 @@ const loginForm = ref({
   username: 'admin',
   password: '123456'
 })
-
+const i18n = useI18n()
 const loginRules = ref({
-  username: [{ required: true, trigger: 'blur', message: '用户名必填' }],
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: i18n.t('msg.login.usernameRule')
+    }
+  ],
   password: [{ required: true, trigger: 'blur', validator: validatePassword() }]
 })
 
