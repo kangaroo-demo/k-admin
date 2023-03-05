@@ -15,6 +15,7 @@
           <svg-icon icon="user" />
         </span>
         <el-input
+          class="login-item"
           v-model="loginForm.username"
           placeholder="username"
           name="username"
@@ -125,6 +126,10 @@ $cursor: #fff;
     margin: 0 auto;
     overflow: hidden;
 
+    ::v-deep(.el-input__wrapper) {
+      background: none;
+      box-shadow: none;
+    }
     ::v-deep(.el-form-item) {
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.1);
