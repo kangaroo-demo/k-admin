@@ -1,6 +1,8 @@
 import i18n from '@/i18n'
 import { watch } from 'vue'
 import store from '@/store'
+
+// 获取路由名称
 export function generateTitle(title) {
   return i18n.global.t('msg.route.' + title)
 }

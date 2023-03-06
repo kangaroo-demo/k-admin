@@ -12,8 +12,10 @@ import './styles/index.scss'
 import './permission'
 
 const app = createApp(App)
+
 // 导入 ElementPlus
 installElementPlus(app)
 // 导入本地Icons
 installIcons(app)
+
 app.use(store).use(router).use(i18n).mount('#app')
