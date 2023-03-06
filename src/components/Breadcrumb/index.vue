@@ -64,7 +64,7 @@ const linkHoverColor = ref(store.getters.cssVar.menuBg)
   .redirect:hover {
     color: v-bind(linkHoverColor);
   }
-  ::v-deep .no-redirect {
+  ::v-deep(.no-redirect) {
     color: #97a8be;
     cursor: text;
   }
