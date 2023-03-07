@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import installElementPlus from './plugins/element'
 import installIcons from './icons'
-
+import installFilter from '@/filter'
 // 导入全局样式
 import './styles/index.scss'
 // 导入权限文件
@@ -17,5 +17,7 @@ const app = createApp(App)
 installElementPlus(app)
 // 导入本地Icons
 installIcons(app)
+// 导入全局属性（过滤器）
+installFilter(app)
 
 app.use(store).use(router).use(i18n).mount('#app')
