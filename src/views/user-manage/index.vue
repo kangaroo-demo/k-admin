@@ -49,9 +49,12 @@
           width="260"
         >
           <template #default="{ row }">
-            <el-button type="primary" size="small">{{
-              $t('msg.excel.show')
-            }}</el-button>
+            <el-button
+              type="primary"
+              size="small"
+              @click="onShowClick(row._id)"
+              >{{ $t('msg.excel.show') }}</el-button
+            >
             <el-button type="info" size="small">{{
               $t('msg.excel.showRole')
             }}</el-button>
@@ -87,6 +90,7 @@ import { onActivated, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import ExportToExcel from './components/Export2Excel.vue'
+
 const router = useRouter()
 // 数据相关
 const tableData = ref([])
@@ -130,6 +134,11 @@ onActivated(() => {
   getListData()
 })
 
+// 查看用户
+const onShowClick = (id) => {
+  router.push(`/user/info/${id}`)
+}
+
 // 删除用户
 const i18n = useI18n()
 const onRemoveClick = (row) => {
@@ -139,7 +148,7 @@ const onRemoveClick = (row) => {
       i18n.t('msg.excel.dialogTitle2'),
     { type: 'warning' }
   ).then(async () => {
-    await deleteUser(row.id)
+    await deleteUser(row._id)
     ElMessage.success(i18n.t('msg.excel.removeSuccess'))
     // 重新渲染数据
     getListData()

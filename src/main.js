@@ -6,6 +6,7 @@ import store from './store'
 import installElementPlus from './plugins/element'
 import installIcons from './icons'
 import installFilter from '@/filter'
+import installDirective from '@/directives'
 // 导入全局样式
 import './styles/index.scss'
 // 导入权限文件
@@ -19,5 +20,7 @@ installElementPlus(app)
 installIcons(app)
 // 导入全局属性（过滤器）
 installFilter(app)
+// 导入全局指令
+installDirective(app)
 
 app.use(store).use(router).use(i18n).mount('#app')
