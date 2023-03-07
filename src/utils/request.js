@@ -22,6 +22,10 @@ service.interceptors.request.use(
       }
       config.headers.Authorization = `Bearer ${store.getters.token}`
     }
+
+    // 配置接口国际化
+    config.headers['Accept-Language'] =
+      store.getters.language === 'en-US' ? 'en' : 'zh'
     // 返回配置
     return config
   },

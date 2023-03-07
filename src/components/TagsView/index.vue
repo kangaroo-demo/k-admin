@@ -37,7 +37,7 @@ import { useRoute } from 'vue-router'
 import { reactive, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 const route = useRoute()
-const store = useStore()
+
 /**
  * 是否被选中
  */
@@ -48,6 +48,7 @@ const isActive = (tag) => {
 /**
  * 关闭 tag 的点击事件
  */
+const store = useStore()
 const onCloseClick = (index) => {
   store.commit('app/removeTagsView', {
     type: 'index',
