@@ -6,7 +6,6 @@
 
 <script setup>
 import { generateTitle } from '@/utils/i18n'
-import { defineProps } from 'vue'
 defineProps({
   title: {
     type: String,

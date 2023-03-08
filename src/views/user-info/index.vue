@@ -87,7 +87,7 @@
 <script setup>
 import { userDetail } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   id: {
@@ -137,7 +137,7 @@ const printObj = {
   }
   .header {
     display: flex;
-    ::v-deep .el-descriptions {
+    ::v-deep(.el-descriptions) {
       flex-grow: 1;
     }
     .avatar {

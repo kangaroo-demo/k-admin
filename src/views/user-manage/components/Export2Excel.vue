@@ -24,7 +24,7 @@
 import { getUserManageAllList } from '@/api/user-manage'
 import { watchSwitchLang } from '@/utils/i18n'
 import { USER_RELATIONS } from './Export2ExcelConstants'
-import { defineProps, defineEmits, ref } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { dateFormat } from '@/utils/date'
 defineProps({

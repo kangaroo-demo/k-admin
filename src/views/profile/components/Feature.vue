@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 const activeName = ref(0)
 defineProps({
   features: {
@@ -23,12 +23,12 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-collapse-item__header {
+::v-deep(.el-collapse-item__header) {
   font-weight: bold;
 }
 
 .el-collapse-item {
-  ::v-deep a {
+  ::v-deep(a) {
     color: #2d62f7;
     margin: 0 4px;
   }
