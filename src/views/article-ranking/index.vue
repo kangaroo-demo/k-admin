@@ -26,10 +26,10 @@
             {{ $filters.relativeTime(row.publicDate) }}
           </template>
           <template #default="{ row }" v-else-if="item.prop === 'action'">
-            <el-button type="primary" size="mini" @click="onShowClick(row)">{{
+            <el-button type="primary" size="small" @click="onShowClick(row)">{{
               $t('msg.article.show')
             }}</el-button>
-            <el-button type="danger" size="mini" @click="onRemoveClick(row)">{{
+            <el-button type="danger" size="small" @click="onRemoveClick(row)">{{
               $t('msg.article.remove')
             }}</el-button>
           </template>
@@ -52,11 +52,14 @@
 </template>
 
 <script setup>
-import { ref, onActivated } from 'vue'
-import { getArticleList } from '@/api/article'
+import { ref, onActivated, onMounted } from 'vue'
+import { deleteArticle, getArticleList } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { dynamicData, selectDynamicLabel, tableColumns } from './dynamic'
-
+import { tableRef, initSortable } from './sortable'
+import { useI18n } from 'vue-i18n'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useRouter } from 'vue-router'
 // 数据相关
 const tableData = ref([])
 const total = ref(0)
@@ -72,7 +75,7 @@ const getListData = async () => {
   tableData.value = result.list
   total.value = result.total
 }
-getListData()
+// getListData()
 // 监听语言切换
 watchSwitchLang(getListData)
 // 处理数据不重新加载的问题
@@ -90,7 +93,32 @@ const handleCurrentChange = (currentPage) => {
   getListData()
 }
 
-// 动态列相关
+onMounted(() => {
+  initSortable(tableData, getListData)
+})
+
+// 点击详情按钮
+const router = useRouter()
+const onShowClick = (row) => {
+  router.push(`/article/${row._id}`)
+}
+
+// 点击删除按钮
+const i18n = useI18n()
+const onRemoveClick = (row) => {
+  ElMessageBox.confirm(
+    i18n.t('msg.article.dialogTitle1') +
+      row.title +
+      i18n.t('msg.article.dialogTitle2'),
+    {
+      type: 'warning'
+    }
+  ).then(async () => {
+    await deleteArticle(row._id)
+    ElMessage.success(i18n.t('msg.article.removeSuccess'))
+    getListData()
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -108,7 +136,7 @@ const handleCurrentChange = (currentPage) => {
     }
   }
 
-  ::v-deep .el-table__row {
+  ::v-deep(.el-table__row) {
     cursor: pointer;
   }
 
@@ -116,5 +144,11 @@ const handleCurrentChange = (currentPage) => {
     margin-top: 20px;
     text-align: center;
   }
+}
+
+::v-deep(.sortable-ghost) {
+  opacity: 0.6;
+  color: #fff !important;
+  background: #304156 !important;
 }
 </style>
