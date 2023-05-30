@@ -7,6 +7,7 @@ import installElementPlus from './plugins/element'
 import installIcons from './icons'
 import installFilter from '@/filters'
 import installDirective from '@/directives'
+import 'default-passive-events'
 // 导入全局样式
 import './styles/index.scss'
 // 导入权限文件
